@@ -8,12 +8,13 @@ public:
         
         dist[0][0]=1;
         q.push({1,{0,0}});
+        if(n==1)return 1;
         while(!q.empty()){
             int dis=q.front().first;
             int row=q.front().second.first;
             int col=q.front().second.second;
             q.pop();
-            if(row==n-1 && col==n-1)return dis;
+          //  if(row==n-1 && col==n-1)return dis;
             for(int i=-1;i<=1;i++){
                 for(int j=-1;j<=1;j++){
                   int nrow=row+i;
@@ -22,6 +23,7 @@ public:
                     dist[nrow][ncol]>dis+1){
                         dist[nrow][ncol]=dis+1;
                         q.push({dist[nrow][ncol],{nrow,ncol}});
+                        if(nrow==n-1 && ncol==n-1)return dist[nrow][ncol];
                     }
 
                 }
