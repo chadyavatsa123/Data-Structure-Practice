@@ -13,10 +13,13 @@ class DisjoinSet{
         return node;
         return parent[node]=findUpar(parent[node]);
     }
-    void unionBySize(int u,int v){
+    void unionBySize(int u,int v,int &extra){
         int ulp_u=findUpar(u);
         int ulp_v=findUpar(v);
-        if(ulp_u==ulp_v)return;
+        if(ulp_u==ulp_v){
+        extra++;
+        return;
+        }
         else if(size[ulp_u]<size[ulp_v]){
             parent[ulp_u]=ulp_v;
             size[ulp_v]+=size[ulp_u];
@@ -31,17 +34,20 @@ class Solution {
 public:
     int makeConnected(int n, vector<vector<int>>& connections) {
         DisjoinSet ds(n);
-        if(connections.size()<n-1)return -1;
+       // if(connections.size()<n-1)return -1;
+        int extra=0;
         for(int i=0;i<connections.size();i++){
             int u=connections[i][0];
             int v=connections[i][1];
-            ds.unionBySize(u,v);
+            ds.unionBySize(u,v,extra);
         }
         int cnt=0;
         for(int i=0;i<n;i++){
             if(ds.findUpar(i)==i)
               cnt++;
         }
+        if(extra>=cnt-1)
         return cnt-1;
+        else return -1;
     }
 };
