@@ -32,7 +32,7 @@ public:
         while(!qq.empty()){
             TreeNode* node=qq.front();
             qq.pop();
-            if(smn>(long long)node->val && mn!=node->val){
+            if(smn>node->val && mn!=node->val){
             smn=node->val;
             find=true;
             }
