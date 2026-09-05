@@ -12,20 +12,30 @@
 class Solution {
 public:
     int findSecondMinimumValue(TreeNode* root) {
-        int mn=INT_MAX;
+        long long mn=LLONG_MAX;
+        long long smn=LLONG_MAX;
         queue<TreeNode*>q;
         q.push(root);
+        bool find=false;
         while(!q.empty()){
             TreeNode* node=q.front();
             q.pop();
-            mn=min(mn,node->val);
+           // mn=min(mn,node->val);
+           if(node->val<mn){
+            smn=mn;
+            mn=node->val;
+           }
+           else if(node->val<smn && node->val>mn){
+            smn=node->val;
+            find=true;
+           }
             if(node->left)
             q.push(node->left);
             if(node->right)
             q.push(node->right);
 
         }
-        queue<TreeNode*>qq;
+        /*queue<TreeNode*>qq;
         qq.push(root);
         bool find=false;
         long long smn=LLONG_MAX;
@@ -41,7 +51,7 @@ public:
             if(node->right)
             qq.push(node->right);
 
-        }
+        }*/
        if(find==false)
        return -1;
         return smn;
