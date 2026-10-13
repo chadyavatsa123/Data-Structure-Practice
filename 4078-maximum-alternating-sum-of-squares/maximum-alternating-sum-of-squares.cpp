@@ -11,12 +11,12 @@ public:
        while(!pq.empty() && i<nums.size()){
        // int num=pq.top();
        // pq.pop();
-        if(i%2==0){
+       // if(i%2==0){
         int num=pq.top();
         pq.pop();
         res[i]=num;
         
-        }
+      //  }
         i=i+2;
        }
        int j=1;
